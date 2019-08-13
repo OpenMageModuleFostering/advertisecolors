@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- DEFINE ALIAS FOR importermanager -->
+    <importer_adminhtml_importermanager>
+        <reference name="content">
+            <block type="importer/adminhtml_importermanager" name="importermanager" template="importer/importermanager.phtml"/>
+        </reference>
+    </importer_adminhtml_importermanager>
+
+    <importer_adminhtml_importermanager_index>
+        <reference name="content">
+            <block type="importer/adminhtml_importermanager" name="importermanager" template="importer/importermanager.phtml"/>
+        </reference>
+    </importer_adminhtml_importermanager_index>
+
+    <importer_adminhtml_importermanager_importProducts>
+        <reference name="content">
+            <block type="importer/adminhtml_importermanager" name="importermanager" template="importer/importermanager.phtml" />
+        </reference>
+    </importer_adminhtml_importermanager_importProducts>
+
+    <importer_adminhtml_importermanager_importXml>
+        <reference name="content">
+            <block type="importer/adminhtml_importermanager" name="importermanager" template="importer/importermanager.phtml"/>
+        </reference>
+    </importer_adminhtml_importermanager_importXml>
+    <!-- END OF DEFINE ALIAS FOR importermanager -->
+
+   <importer_adminhtml_importerbackend_index>
+        <reference name="content">
+            <block type="importer/adminhtml_importerbackend" name="importerbackend" template="importer/importerbackend.phtml"/>
+        </reference>
+    </importer_adminhtml_importerbackend_index>
+    
+    <importer_adminhtml_importerbackend_importProducts>
+        <reference name="content">
+            <block type="importer/adminhtml_importerbackend" name="importerbackend" template="importer/importerbackend.phtml" />
+        </reference>
+    </importer_adminhtml_importerbackend_importProducts>
+    
+    <importer_adminhtml_importerbackend_importXml>
+        <reference name="content">
+            <block type="importer/adminhtml_importerbackend" name="importerbackend" template="importer/importerbackend.phtml"/>
+        </reference>
+    </importer_adminhtml_importerbackend_importXml>
+    
+    <importer_adminhtml_queue_index>
+        <reference name="content">
+            <block type="importer/adminhtml_queue" name="advertise_importer" />
+        </reference>
+    </importer_adminhtml_queue_index>
+    
+    <importer_adminhtml_job_index>
+        <reference name="content">
+            <block type="importer/adminhtml_job" name="advertise_importer" />
+        </reference>
+    </importer_adminhtml_job_index>
+    
+</layout>

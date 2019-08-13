@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<layout>
+	<adminhtml_system_config_edit>
+		<reference name="content">
+			<block type="Advertise_Importer/registration" name="registration" template="advertise/registration.phtml" />
+		</reference>
+	</adminhtml_system_config_edit>
+	<adminhtml_check_admin>
+		<reference name="content">
+			<block type="Advertise_Importer/adminhtml_check" name="check_admin"/>
+		</reference>
+	</adminhtml_check_admin>
+</layout>

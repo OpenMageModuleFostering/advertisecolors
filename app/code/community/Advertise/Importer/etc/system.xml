@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<config>
+    <!-- THIS LEFT-HAND MENU SECTION IS FOR TESTING ONLY, ALLOWS USER TO cURL A URL FROM ANYWHERE
+    # XMLCOMMENT: <!- Top Level Tabs ->
+    <tabs>
+        <phpsolut translate="label" module="importer">
+            <label>Product Importer</label>
+            <sort_order>300</sort_order>
+        </phpsolut>
+    </tabs>
+
+    # XMLCOMMENT: <!- Sections ->
+	<sections>
+		<importer translate="label" module="importer">
+			<label>Product Importer</label>
+			<tab>phpsolut</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>99999</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+                <importer_group translate="label">
+                    <label>Product Import Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</enabled>
+                        # XMLCOMMENT: Comment out this test_mode Element <-
+                        <test_mode translate="label">
+							<label>Test Mode</label>
+							<comment>In Test mode no changes are made to live data</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</test_mode>
+                        # XMLCOMMENT: ->
+                        
+                        <download_url>
+                            <label>XML Feed download URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Location of the XML feed to import products from.</comment>
+                        </download_url>
+                    </fields>
+                </importer_group>
+			</groups>
+		</importer>
+	</sections>
+        -->
+</config>

@@ -1,0 +1,66 @@
+<style type="text/css">
+    .form-wrap { margin-bottom: 20px; }
+    .restore { float: right; }
+    .adbox { float: right;
+             margin-right:22px;
+           }
+</style>
+<img class="adv_logo" src="http://www.adverti.se/img/magento/backend-advertise-logo.png" alt="Adverti.se" height="45" width="220" />
+<iframe src="<?php echo $this->_getAdsIframeUrl() ?>" class="adbox" frameborder="0" scrolling="no" width="336" height="280"></iframe>
+<h1>Update Product Colors</h1>
+<h2>Step 1: Get Color Data</h2>
+<p>Click below to load color data from Adverti.se into the queue.</p>
+<div class="form-wrap">
+    <form id="feedForm" action="<?php echo $this->_getFeedFromAction() ?>" method="post">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <input name="restore" type="hidden" value="false" />
+        <button class="scalable save" type="submit" id="importXmlButton">
+            <span>Get Adverti.se Color Data</span>
+        </button>
+    </form>
+</div>
+<h2>Step 2: Import Colors to Magento</h2>
+<p>
+    There are currently <strong><?php echo $this->_getQueueCount() ?></strong> items in the import queue.<br />
+    Click below to import them into Magento.
+</p>
+<div class="form-wrap">
+    <form id="importForm" action="<?php echo $this->_getImportFromAction() ?>" method="post">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <?php $disabled = $this->_getQueueCount() == 0 ?>
+        <button class="scalable save<?php if($disabled): ?> disabled<?php endif ?>" 
+                type="submit" id="importProductsButton"<?php if($disabled): ?> 
+                disabled="disabled"<?php endif ?>>
+            <span>Import Colors to Magento</span>
+        </button>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="restore">
+<h3>To restore original colors</h3>
+<p>Step 1: Click below to load your original color data into the queue.</p>
+<p>Step 2: Click the &quot;Step 2&quot; button above to restore them in Magento.</p>
+<div class="form-wrap">
+    <form id="feedForm" action="<?php echo $this->_getFeedFromAction() ?>" method="post">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <input name="restore" type="hidden" value="true" />
+        <button class="scalable save" type="submit" id="restoreColorsButton">
+            <span>Get Original Color Data</span>
+        </button>
+    </form>
+</div>
+</div>
+
+<?php if(false): ?>
+<!-- FOR DEBUG ONLY
+<h2>View Queues</h2>
+<p>
+    Click to view the <a href="<?php echo $this->_getJobQueueURL() ?>">job queue</a>.
+</p>
+<p>
+    Click to view the <a href="<?php echo $this->_getProductImportQueueURL() ?>">product import  queue</a>.
+</p>
+-->
+<?php endif ?>

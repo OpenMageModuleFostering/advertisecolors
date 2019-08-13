@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Advertise_Importer>
+            <version>2.0.0</version>
+        </Advertise_Importer>
+    </modules>
+
+    <frontend>
+        <routers>
+            <importer>
+                <use>standard</use>
+                <args>
+                    <module>Advertise_Importer</module>
+                    <frontName>importer</frontName>
+                </args>
+            </importer>
+        </routers>
+
+        <!-- Should make this advertise_importer and hook it up somehow? -->
+        <layout>
+            <updates>
+                <importer>
+                    <file>importer.xml</file>
+                </importer>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <global>
+        <helpers>
+            <importer>
+                <class>Advertise_Importer_Helper</class>
+            </importer>
+        </helpers>   
+        <blocks>
+            <importer>
+                <class>Advertise_Importer_Block</class>
+            </importer>
+        </blocks>
+
+        <models>
+            <importer>
+                <class>Advertise_Importer_Model</class>
+                <resourceModel>importer_mysql4</resourceModel>
+            </importer>
+            <importer_mysql4>
+                <class>Advertise_Importer_Model_Mysql4</class>
+                <entities>
+                    <import>
+                        <table>advertise_import</table>
+                    </import>
+                    <job>
+                        <table>advertise_jobs</table>
+                    </job>
+                </entities>
+            </importer_mysql4>
+        </models>
+
+        <resources>
+            <importer_setup>
+                <setup>
+                    <module>Advertise_Importer</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </importer_setup>
+            <importer_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </importer_write>
+            <importer_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </importer_read>
+        </resources>
+    </global> 
+    <admin>
+        <routers>
+            <importer>
+                <use>admin</use>
+                <args>
+                    <module>Advertise_Importer</module>
+                    <frontName>importer</frontName>
+                </args>
+            </importer>
+        </routers>
+    </admin>
+    <adminhtml>
+<!-- layout -->
+        <layout>
+            <updates>
+                <importer>
+                    <file>importer.xml</file>
+                </importer>
+            </updates>
+        </layout>
+<!-- admin events -->
+<!--        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <importer_notification>
+                        <type>singleton</type>
+                        <class>importer/feed</class>
+                        <method>observe</method>
+                    </importer_notification>
+                </observers>
+            </controller_action_predispatch>
+        </events>-->
+    </adminhtml>
+<!-- schedule imports -->    
+    <crontab>
+        <jobs>
+<!-- Import Products -->
+            <advertise_products_importer>
+                <schedule>
+                    <!--<cron_expr>0,15,30,45 * * * *</cron_expr>--><!-- every 15 min -->
+                    <!--<cron_expr>* * * * *</cron_expr>--><!--every time cron is run! -->
+                    <cron_expr>*/30 * * * *</cron_expr><!-- every 10 min -->
+                </schedule>
+                <run>
+                    <!--<model>importer/Scheduler::importProducts</model>-->
+                </run>
+            </advertise_products_importer>
+        </jobs>
+    </crontab>
+<!-- default settings -->
+    <default>
+        <importer><!-- section -->
+            <importer_group><!-- group -->
+                <enabled>1</enabled>
+                <download_url>http://</download_url>
+             </importer_group>
+        </importer>
+    </default>
+</config> 

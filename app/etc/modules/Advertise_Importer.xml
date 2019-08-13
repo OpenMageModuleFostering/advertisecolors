@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+<modules>
+   <Advertise_Importer>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>2.0.0</version>
+   </Advertise_Importer>
+</modules>
+</config>

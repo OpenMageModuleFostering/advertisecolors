@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <!-- Add Adverti.se item to Catalog menu - same for all Adverti.se modules -->
+                <advertise_menu translate="title">
+                    <title>Adverti.se</title>
+                    <sort_order>199</sort_order>
+                    <!-- Add Colors to Adverti.se sub-menu -->
+                    <children>
+                        <advertise_colors translate="title">
+                            <title>Colors</title>
+                            <sort_order>1</sort_order>
+                            <action>importer/adminhtml_importermanager</action>
+                        </advertise_colors>
+                    </children>
+                </advertise_menu>
+            </children>
+         </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <advertise_menu translate="title">
+                                <title>Adverti.se</title>
+                                <children>
+                                    <advertise_colors translate="title">
+                                        <title>Colors</title>
+                                    </advertise_colors>
+                                 </children>
+                            </advertise_menu>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
