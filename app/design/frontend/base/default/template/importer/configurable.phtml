@@ -23,12 +23,12 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     <dl>
     <?php foreach($_attributes as $_attribute): ?>
     <?php /* -+-+-+-+-+-+-+- Start of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?>
-        <?php if (strcmp($_attribute->getProductAttribute()->getAttributeCode(), 'advertise_colors') == 0) : 
+        <?php if (strcmp($_attribute->getProductAttribute()->getAttributeCode(), 'advertise_swatch_colors') == 0) : 
             // It is the Adverti.se Colors attribute so add our code to page
             $productAttributeOptions = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
             $availableColors = "\"";
             foreach ($productAttributeOptions as $productAttribute) {
-                if (strcmp($productAttribute['attribute_code'], 'advertise_colors') == 0) {
+                if (strcmp($productAttribute['attribute_code'], 'advertise_swatch_colors') == 0) {
                     foreach ($productAttribute['values'] as $prodattribute) {
                         $sql = "SELECT value FROM eav_attribute_option_value WHERE option_id = '".$prodattribute['value_index']."' AND store_id = 0";
                         $data = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
@@ -84,7 +84,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
         
         <?php /* Below here is the default Magento code for configurable product.
                * If copying this to your theme's configurable.phtml file the existing code should
-               * go here in the 'else' clause, so that any attributes other than advertise_colors 
+               * go here in the 'else' clause, so that any attributes other than advertise_swatch_colors 
                * are rendered according to your theme's default selector.  
                */ ?>
         <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
