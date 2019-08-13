@@ -41,13 +41,7 @@ class Advertise_Importer_Model_Config extends Varien_Object
     public function getAdvertiseFeed()
     {
         $restore = Mage::getSingleton('core/app') -> getRequest() -> getParam('restore', null);
-        if ($this->getBaseUrl() == '127.0.0.1/magento1701/') {
-            $url = 'http://advertise.local/feeds/magento/email:';
-            //Mage::log('Locally testing feeds.');
-        } else {
-            $url = 'http://i.adverti.se/feeds/magento/email:';
-        }
-        $url = $url .
+        $url = 'http://i.adverti.se/feeds/magento/email:' .
                 $this->getAdvertiseEmail() .
                 '/site:' . $this->getBaseUrl() . 'restore:' . $restore; // No slash before restore as BaseUrl has a trailing slash already
         Mage::log("Importing feed from URL: ".$url);

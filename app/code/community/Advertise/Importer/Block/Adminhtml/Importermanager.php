@@ -43,13 +43,7 @@ class Advertise_Importer_Block_Adminhtml_Importermanager extends Mage_Adminhtml_
      * @return  string
      */
     protected function _getAdsIframeUrl() {
-        if ($this->getBaseUrl() == '127.0.0.1/magento/') {
-            $url = 'http://advertise.local/frameads?email=';
-            //Mage::log('Locally testing feeds.');
-        } else {
-            $url = 'http://i.adverti.se/frameads?email=';
-        }
-        $url = $url .
+        $url = 'http://i.adverti.se/frameads?email=' .
                $this->getAdvertiseEmail() .
                '&amp;site=' . $this->getBaseUrl();
 
