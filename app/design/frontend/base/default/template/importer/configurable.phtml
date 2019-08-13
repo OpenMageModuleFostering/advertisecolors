@@ -1,0 +1,110 @@
+<?php
+/**
+ * @category    design
+ * @package     Advertise_Importer
+ *
+ * This is a modification of Magento's base_default file:
+ * catalog/product/view/type/options/configurable.phtml
+ *
+ * It's purpose is to replace the default dropdown menu for selecting the 
+ * Adverti.se Colors attribute with the Colors dropdown.
+ * 
+ * Other attributes continue to have the default dropdown.
+ * 
+ */
+?>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+    <?php foreach($_attributes as $_attribute): ?>
+    <?php /* -+-+-+-+-+-+-+- Start of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?>
+        <?php if (strcmp($_attribute->getProductAttribute()->getAttributeCode(), 'advertise_colors') == 0) : 
+            // It is the Adverti.se Colors attribute so add our code to page
+            $productAttributeOptions = $_product->getTypeInstance(true)->getConfigurableAttributesAsArray($_product);
+            $availableColors = "\"";
+            foreach ($productAttributeOptions as $productAttribute) {
+                if (strcmp($productAttribute['attribute_code'], 'advertise_colors') == 0) {
+                    foreach ($productAttribute['values'] as $prodattribute) {
+                        $sql = "SELECT value FROM eav_attribute_option_value WHERE option_id = '".$prodattribute['value_index']."' AND store_id = 0";
+                        $data = Mage::getSingleton('core/resource')->getConnection('core_read')->fetchAll($sql);
+                        $admincolor = $data[0]['value'];
+                        $availableColors = $availableColors . $admincolor . "," . $prodattribute['value_index'] . "," . $prodattribute['store_label'] . "," . $prodattribute['pricing_value'] . "," . $prodattribute['is_percent'] . "\",\"";
+                    }
+                    $availableColors = $availableColors . "\"";
+                }
+            }
+            if (strlen($availableColors) > 3) {
+                $availableColors = substr($availableColors, 0, strlen($availableColors) - 3);
+            }
+        ?>
+        <div><br/><div><h4><em>*</em> Color</h4></div>
+        <input name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" type="hidden" value="" /><!-- We set a hidden field here to store the value of the color being selected-->
+        <div id="advColorDropdown"></div>
+            <script type="text/javascript">
+                // This script runs *after* the element to change to the Colors drop-down exists on the page
+                 var basePrice = <?php echo $basePrice = $_product->getPrice(); ?>;
+                 var currencySymbol = '<?php echo Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?>';
+                 var priceFormatted = '<?php echo Mage::helper('core')->currency($basePrice, true, false); ?>';
+
+                 createDDData([<?php echo $availableColors; ?>]);
+                 jQuery('#advColorDropdown').ddslick({
+                   data: ddData,
+                   width: 260,
+                   imagePosition: "left",
+                   selectText: "Select color",
+                   onSelected: function (data) {
+                       var advHiddenField = document.getElementById('attribute<?php echo $_attribute->getAttributeId() ?>');
+                       advHiddenField.setAttribute('value', data.selectedData.value);
+
+                       try {
+                           var updatePriceTo;
+                           if (data.selectedData.description.length > 1) {
+                               updatePriceTo = data.selectedData.description;
+                           } else {
+                               updatePriceTo = priceFormatted;
+                           }
+                           if($('product-price-<?php echo $_product->getId(); ?>')){
+                              $('product-price-<?php echo $_product->getId(); ?>').innerHTML = '<span class="price">'+updatePriceTo+'</span>';
+                           }
+                           if($('product-price-<?php echo $_product->getId(); ?>_clone')){
+                              $('product-price-<?php echo $_product->getId(); ?>_clone').innerHTML = '<span class="price">'+updatePriceTo+'</span>';
+                           }
+                       } catch (err){}
+                   }
+                 });
+            </script>
+        </div>
+        <?php else: ?>
+        <?php /* -+-+-+-+-+-+-+- End of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?>
+        
+        <?php /* Below here is the default Magento code for configurable product.
+               * If copying this to your theme's configurable.phtml file the existing code should
+               * go here in the 'else' clause, so that any attributes other than advertise_colors 
+               * are rendered according to your theme's default selector.  
+               */ ?>
+        <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            <div class="input-box">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                  </select>
+              </div>
+        </dd>
+        
+        <?php /* -+-+-+-+-+-+-+- Start of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- 
+               * If copying this to your theme's configurable.phtml file place 
+               * this 'endif' immediately before the 'endforeach'
+               */ ?>
+        <?php endif;?>
+        <?php /* -+-+-+-+-+-+-+- End of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?>
+    <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+    </script>
+<?php endif;?>

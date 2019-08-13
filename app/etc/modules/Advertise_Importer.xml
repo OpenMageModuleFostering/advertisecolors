@@ -1,10 +1,18 @@
 <?xml version="1.0"?>
+<!-- 
+/**
+ * This package is part of the Adverti.se Colors Module
+ * @category   Advertise
+ * @package    Advertise_Importer
+ */
+ -->
 <config>
 <modules>
    <Advertise_Importer>
       <active>true</active>
       <codePool>community</codePool>
-      <version>2.0.1</version>
+      <!-- Adverti.se Colors module version = 1.3.5 -->
+      <version>2.0.2</version>
    </Advertise_Importer>
 </modules>
 </config>

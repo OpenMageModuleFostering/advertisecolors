@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adverti.se Colors</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="./resources/install.css" media="all" />
+    </head>
+    <body>
+        <div id="content">
+            <img class="adv_logo" src="./resources/backend-advertise-logo.png" alt="Adverti.se" height="45" width="220" />
+            <h1>Adverti.se Colors</h1>
+            <p>Thank you for installing our Colors module.<br />
+               <br />
+               Using this this module you can harness image recognition technology to automatically populate the 
+               color attribute of your 'simple' products.<br />
+               <br />
+               For 'configurable' products that are available in a range of colors you can use our 
+               color-selector dropdown. It has a wide range of common colors, and color names can be
+               configured to anything you like.
+            </p>
+            <hr />
+            <h2>Automatic Color Labelling</h2>
+            <h3>Step 1</h3>
+            <p>If you have not done so already, register your Adverti.se account by saving your details in the Magento Admin panel at:<br />
+            <br />
+            <span class="filepath">System &rarr; Configuration &rarr; Adverti.se &rarr; Account Settings</span><br />
+            <br />
+            At the same time your product image data will be sent to us for processing.
+            </p>
+            <h3>Step 2</h3>
+            <p>You will receive an e-mail to notify you when processing of your image files is complete.
+                Once you receive this e-mail go to the Adverti.se Colors page in your Magento Admin:<br />
+                <br />
+                <span class="filepath">Catalog &rarr; Adverti.se &rarr; Colors</span><br />
+                <br />
+                First click the "Get Adverti.se Color Data" button. This will retrieve the color data from our server
+                and save it ready to import into your store.<br />
+                When the data transfer is complete the grey "Import Colors To Magento" button will become activated and turn orange.
+                Click this button to update the products in your database with the new color values.
+            </p>
+            <hr />
+            <h2>Color Selector Drop-Down</h2>
+            <img class="align-right" src="resources/advertise-colors-dropdown.png" alt="Adverti.se Colors Drop-Down Sample" />
+            <p>
+                For configurable products most Magento themes only allow text-based drop-downs for customers 
+                to select the options they want.  When you install our Colors module you can let customers see the 
+                color they are selecting with our drop-down.<br />
+                <br />
+                When installed the  Adverti.se Colors module adds a new configurable attribute 
+                <span class="code filename">advertise_colors</span>. When products are made 
+                configurable on the <span class="code filename">advertise_colors</span>
+                attribute the Adverti.se Colors drop-down will be used for product option selection
+                in the product pages of your store. <br />
+                <br />
+                On most installations the Adverti.se Colors drop-down will
+                automatically appear for any configurable products selectable on the 
+                <span class="code filename">advertise_colors</span> attribute. However, if your
+                current theme overrides the default Magento handling of configurable products 
+                you may need to make a simple edit to one theme file for the Colors drop-down to work.<br />
+                <br />
+                To check if you will need to modify a file, check to see if the following template file 
+                <span class="filename">configurable.phtml</span> exists in your Magento installation:<br />
+                <br />
+                <span class="filepath">&lt;Magento-root-folder&gt;/app/design/frontend/&lt;theme-package&gt;/&lt;theme-name&gt;/template/catalog/product/view/type/options/configurable.phtml</span><br />
+                <br />
+                If this file does not exist then it means that your theme uses Magento's default template and
+                there is nothing to do - the Adverti.se Colors drop-down should work automatically.<br />
+                <br />
+                If this file does exist then you need to copy and paste a section of code into it from this file, which 
+                was created as part of your Adverti.se Colors installation:<br />
+                <br />
+                <span class="filepath">&lt;Magento-root-folder&gt;/app/design/frontend/base/default/template/importer/configurable.phtml</span><br />
+                <br />
+                Open this file and copy the section of code between the lines shown:
+            </p>
+<pre>
+  <code>
+      &lt;?php /* -+-+-+-+-+-+-+- Start of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?&gt;
+          ...
+          ...
+          ...
+      &lt;?php /* -+-+-+-+-+-+-+- End of Adverti.se Color Drop-Down code -+-+-+-+-+-+-+- */ ?&gt;
+  </code>
+</pre>
+            <p>And paste it into your theme's <span class="filename">configurable.phtml</span> file immediately below the line:</p>
+<pre>
+  <code>
+      &lt;?php foreach($_attributes as $_attribute): ?&gt;
+  </code>
+</pre>
+            <p>You will also need to add a <span class="code">&lt;?php endif;?&gt;</span> 
+               immediately before the <span class="code">&lt;?php endforeach; ?&gt;</span>.
+            </p> 
+            <h3>Current Drop-Down Color Swatch</h3>
+            
+            <table cellpadding="5" cellspacing="5" border="0" class="swatch">
+                <tr>
+                    <td class="righttext">Black: </td>
+                    <td bgcolor="#000000" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Gray_Dark: </td>
+                    <td bgcolor="#696969" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Gray: </td>
+                    <td bgcolor="#A9A9A9" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Gray_Light: </td>
+                    <td bgcolor="#D3D3D3" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">White: </td>
+                    <td bgcolor="#FFFAFA" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Cream: </td>
+                    <td bgcolor="#FFFDD0" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Yellow_Light: </td>
+                    <td bgcolor="#FFFF99" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Yellow: </td>
+                    <td bgcolor="#FFD700" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Yellow_Dark: </td>
+                    <td bgcolor="#FCC200" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Orange: </td>
+                    <td bgcolor="#FFA500" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Orange_Dark: </td>
+                    <td bgcolor="#FF4500" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Red_Bright: </td>
+                    <td bgcolor="#FF0000" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Red: </td>
+                    <td bgcolor="#C80815" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Red_Dark: </td>
+                    <td bgcolor="#8B0000" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Brown: </td>
+                    <td bgcolor="#8B4513" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Brown_Light: </td>
+                    <td bgcolor="#D2B48C" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Beige: </td>
+                    <td bgcolor="#F5E4B4" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Pink_Light: </td>
+                    <td bgcolor="#FFE4E1" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Pink: </td>
+                    <td bgcolor="#FFC0CB" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Pink_Dark: </td>
+                    <td bgcolor="#F08080" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Pink_Bright: </td>
+                    <td bgcolor="#FF1493" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Purple_Dark: </td>
+                    <td bgcolor="#8B008B" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Purple: </td>
+                    <td bgcolor="#BA55D3" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Purple_Light: </td>
+                    <td bgcolor="#D8BFD8" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Blue_Light: </td>
+                    <td bgcolor="#87CEEB" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Blue: </td>
+                    <td bgcolor="#0000FF" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Blue_Dark: </td>
+                    <td bgcolor="#191970" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Teal: </td>
+                    <td bgcolor="#008080" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Turquoise: </td>
+                    <td bgcolor="#40E0D0" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Green_Light: </td>
+                    <td bgcolor="#90EE90" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Green: </td>
+                    <td bgcolor="#008000" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Green_Dark: </td>
+                    <td bgcolor="#006400" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="righttext">Olive: </td>
+                    <td bgcolor="#808000" class="borderon" width="300px">&nbsp;</td>
+                </tr>
+            </table>
+            <p>The color names shown here are the 'Admin' labels; frontend color labels for the 
+                colors that you use can be set in your Magento Admin panel here:<br />
+            <br />
+            <span class="filepath">Catalog &rarr; Attributes &rarr; Manage Attributes &rarr; advertise_colors &rarr; Manage Label / Options</span><br />
+            <br />
+            </p>
+            <hr />
+            <p class="footer">&copy; Adverti.se 2013</p>
+        </div>
+    </body>
+</html>
