@@ -4,12 +4,14 @@
     .adbox { float: right;
              margin-right:22px;
            }
+    .buylink {font-size: 15px; font-weight:bold;}
 </style>
 <img class="adv_logo" src="http://www.adverti.se/img/magento/backend-advertise-logo.png" alt="Adverti.se" height="45" width="220" />
 <iframe src="<?php echo $this->_getAdsIframeUrl() ?>" class="adbox" frameborder="0" scrolling="no" width="336" height="280"></iframe>
+<br /><br />
 <h1>Update Product Colors</h1>
 <h2>Step 1: Get Color Data</h2>
-<p>Click below to load color data from Adverti.se into the queue.</p>
+<p>When you have been notified that your color data is ready click below to load color data from Adverti.se into your import queue.</p>
 <div class="form-wrap">
     <form id="feedForm" action="<?php echo $this->_getFeedFromAction() ?>" method="post">
         <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
@@ -19,7 +21,7 @@
         </button>
     </form>
 </div>
-<h2>Step 2: Import Colors to Magento</h2>
+<h2>Step 2: Import Colors into your Magento store</h2>
 <p>
     There are currently <strong><?php echo $this->_getQueueCount() ?></strong> items in the import queue.<br />
     Click below to import them into Magento.
@@ -28,16 +30,18 @@
     <form id="importForm" action="<?php echo $this->_getImportFromAction() ?>" method="post">
         <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
         <?php $disabled = $this->_getQueueCount() == 0 ?>
-        <button class="scalable save<?php if($disabled): ?> disabled<?php endif ?>" 
-                type="submit" id="importProductsButton"<?php if($disabled): ?> 
+        <button class="scalable save<?php if($disabled): ?> disabled<?php endif ?>"
+                type="submit" id="importProductsButton"<?php if($disabled): ?>
                 disabled="disabled"<?php endif ?>>
             <span>Import Colors to Magento</span>
         </button>
     </form>
 </div>
+<p>&nbsp;</p>
+<div class="buylink">
+    <p>To purchase a subscription to Adverti.se Colors please <a target="_blank" href="http://i.adverti.se/buybutton/display/3/<?php echo $this->getAdvertiseEmail(); ?>">click here</a>.</p>
+</div>
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <div class="restore">
 <h3>To restore original colors</h3>
 <p>Step 1: Click below to load your original color data into the queue.</p>

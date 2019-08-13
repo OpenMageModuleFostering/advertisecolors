@@ -8,6 +8,8 @@
  */
 class Advertise_Importer_Adminhtml_ImportermanagerController extends Mage_Adminhtml_Controller_Action
 {
+    public $_EXPORT_TYPE = "prodfeed";
+    
     /**
      * Default Action
      */
@@ -58,8 +60,46 @@ class Advertise_Importer_Adminhtml_ImportermanagerController extends Mage_Adminh
         }
     }
     
-    public function postAction()
+    /**
+     * Run the export of product data
+     */
+    public function exportproductsAction()
     {
+        $config = Mage::getModel('dataexport/config');
+        
+        if( ! $config->getIsEnabled()) {
+            Mage::throwException($this->__('Data Export Module Disabled!'));
+        }
+        try {
+            $exporter = Mage::getModel('dataexport/exporter');
+            /* @var $exporter Advertise_Dataexport_Model_Exporter */
+
+            // Set export type for uploaded filename
+            $exporter->setExportType($this->_EXPORT_TYPE);
+                
+            /**
+             * Add Products Export
+             */
+             $exportAdapter = Mage::getModel('dataexport/exporter_product');
+             $exporter->addExporter($exportAdapter);
+
+            /**
+             * Do it!
+             */
+            $totalItems = $exporter->export();
+
+            $message = $this->__('Your product data has been submitted successfully.');
+            Mage::getSingleton('adminhtml/session')->addSuccess($message);
+            Mage::getSingleton('adminhtml/session')->addSuccess("{$totalItems} products successfully exported.");
+        } 
+        catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
+        $this->_redirect('*/*');
+    }
+    
+//    public function postAction()
+//    {
 //        $post = $this->getRequest()->getPost();
 //        try {
 //            if (empty($post)) {
@@ -72,5 +112,5 @@ class Advertise_Importer_Adminhtml_ImportermanagerController extends Mage_Adminh
 //            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
 //        }
 //        $this->_redirect('*/*');
-    }
+//    }
 }

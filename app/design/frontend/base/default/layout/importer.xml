@@ -4,10 +4,43 @@
         <reference name="root">   
             <action method="setTemplate"><template>page/1column.phtml</template></action>   
         </reference>
-		   
-        <reference name="content">   
-            <block type="importer/index" name="importer_index" template="importer/index.phtml"/>   
-        </reference>   
-    </importer_index_index>   
-</layout>   
-	
+
+        <reference name="content">
+            <block type="importer/index" name="importer_index" template="importer/index.phtml"/>
+        </reference>
+    </importer_index_index>
+    
+   <!-- Override configurable.phtml -->
+   <PRODUCT_TYPE_configurable translate="label" module="catalog">
+       <reference name="product.info.options.wrapper">
+           <block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-" template="importer/configurable.phtml"/>
+       </reference>
+   </PRODUCT_TYPE_configurable>
+    
+    <!-- Add Adverti.se Color scripts and css to head of product pages (handle for product pages is 'catalog_product_view') -->
+    <catalog_product_view>
+        <reference name="head">
+            <!-- DDSlick JavaScript for modifying colors dropdown -->
+            <block type="core/text" name="ddslick.js">
+                <action method="setText">
+                    <text><![CDATA[<script type="text/javascript" src="http://retail.adverti.se/js/jquery.ddslick.min.js"></script>]]></text>
+                </action>
+            </block>
+            
+            <!-- Adverti.se JavaScript for Colors -->
+            <block type="core/text" name="adverti.se.colors.js">
+                <action method="setText">
+                    <text><![CDATA[<script type="text/javascript" src="http://retail.adverti.se/js/colors-1_0_0.js"></script>]]></text>
+                </action>
+            </block>
+
+            <!-- Adverti.se CSS for Colors -->
+            <block type="core/text" name="adverti.se.colors.css">
+                <action method="setText">
+                    <text><![CDATA[<link rel="stylesheet" type="text/css" href="http://retail.adverti.se/css/colors-1_0_0.css" media="all" />]]></text>
+                </action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+</layout>		

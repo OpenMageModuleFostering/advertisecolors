@@ -90,4 +90,5 @@ class Advertise_Importer_Block_Adminhtml_Importermanager extends Mage_Adminhtml_
     {
         return $this->getUrl('*/adminhtml_queue');
     }
+        
 }
