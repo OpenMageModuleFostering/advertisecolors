@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/AdvertiseColors",
+    "name": "OpenMageModuleFostering\/AdvertiseColors",
     "type": "magento-module",
     "license": "OSL",
     "homepage": "",
     "description": "Automated colour attribute setting using image recognition technology. Say goodbye to hours of manual tedium!",
     "authors": [
-    {
-        "name": "Michael Oxley",
-        "email": "mike@adverti.se"
-    }
-],
+        {
+            "name": "Michael Oxley",
+            "email": "mike@adverti.se"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
